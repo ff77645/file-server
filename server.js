@@ -4,6 +4,7 @@ import KoaLogger from 'koa-logger'
 import Router from '@koa/router'
 import apiV1 from './api/v1/index.js'
 import serve from 'koa-static'
+import { ResultError, ResultSuccess } from './helper/result.js'
 
 
 const startServer = config =>{
@@ -15,6 +16,12 @@ const startServer = config =>{
   }))
   app.use(async (ctx,next) => {
     ctx.state.rootDir = config.rootDir
+    ctx.handleError = message =>{
+      ctx.body = new ResultError(message)
+    }
+    ctx.handleSuccess = (data,message) =>{
+      ctx.body = new ResultSuccess(data,message)
+    }
     next()
   })
 

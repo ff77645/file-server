@@ -5,7 +5,7 @@ export const isDir = path => fs.statSync(path).isDirectory()
 
 export const isExists = path => fs.existsSync(path)
 
-export const getFullPath = (path,rootDir)=>{
-  if(path.isAbsolute(path)) return path
-  return path.join(rootDir,path)
+export const getFullPath = (filePath='',rootDir)=>{
+  if(path.isAbsolute(filePath)) return filePath
+  return path.join(rootDir,filePath)
 }
